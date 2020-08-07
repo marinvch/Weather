@@ -108,18 +108,3 @@ navigator.geolocation.getCurrentPosition((position) => {
     },
 
 );
-
-const googleApi = 'AIzaSyBu8-exdzeJa1o6zsm3l0Qk6h8tv4tbGQM'
-const crossOrgin = {
-
-}
-
-fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${googleApi}`, {
-        method: "GET",
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "text/plain"
-        }
-    })
-    .then(response => response.json())
-    .then(result => console.log(result))
