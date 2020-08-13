@@ -1,19 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
-    navigator.geolocation.getCurrentPosition((position) => {
-        postCord(position.coords);
-        () => {
-            fetch = ('https://ipinfo.io/geo', (response) => {
-                var loc = response.loc.split(',');
-                var coords = {
-                    latitude: loc[0],
-                    longitude: loc[1]
-                };
-                postCord(coords);
-            });
-        }
-    }, );
+    // fetch('http://ip-api.com/json')
+    //     .then(res => res.json())
+    //     .then(data => postCord(data))
 
-    function postCord(coords) {
+    const location = 'https://ipinfo.io?token=2c2637df1b55c4'
+    fetch(location)
+        .then(res => res.json())
+        .then(data => {
+            const [lat, long] = data.loc.split(',')
+            postCord(lat, long)
+        })
+
+    function postCord(lat, long) {
+
         //Making the map
         const mymap = L.map('mapid').setView([0, 0], 1);
         const attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
@@ -30,9 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         });
 
-        const { latitude, longitude } = coords
         const marker = L.marker([0, 0], { icon: weatherIcon }).addTo(mymap);
-        marker.setLatLng([latitude, longitude]);
+        marker.setLatLng([lat, long]);
 
         const mapLayerToken = 'pk.eyJ1IjoibWFyaW52Y2giLCJhIjoiY2tka2E0NnY4MG1zZjJ0bzh6bXp5dnBsaiJ9.FGZZfWXBjrZ9WIw8PRo1iA'
 
@@ -47,12 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         //NEW CODE
-
-
-
-
     }
-
-
 
 });

@@ -56,22 +56,19 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     //current location
-    const navi = navigator.geolocation.getCurrentPosition((position) => {
-        postCord(position.coords);
-        () => {
-            fetch = ('https://ipinfo.io/geo', (response) => {
-                var loc = response.loc.split(',');
-                var coords = {
-                    latitude: loc[0],
-                    longitude: loc[1]
-                };
-                postCord(coords);
-            });
-        }
-    }, );
 
-    function postCord(coords) {
-        fetch(`http://${app.baseUrl}/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${app.key}&lang=bg&units=metric`)
+    const location = 'https://ipinfo.io?token=2c2637df1b55c4'
+    fetch(location)
+        .then(res => res.json())
+        .then(data => {
+            const [lat, long] = data.loc.split(',')
+            postCord(lat, long)
+
+        })
+
+
+    function postCord(lat, long) {
+        fetch(`http://${app.baseUrl}/weather?lat=${lat}&lon=${long}&appid=${app.key}&lang=bg&units=metric`)
             .then(response => response.json())
             .then(result => currentWeather(result))
             .catch(error => console.log('404 not Found'));
