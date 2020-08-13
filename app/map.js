@@ -32,17 +32,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const marker = L.marker([0, 0], { icon: weatherIcon }).addTo(mymap);
         marker.setLatLng([lat, long]);
 
-        const mapLayerToken = 'pk.eyJ1IjoibWFyaW52Y2giLCJhIjoiY2tka2E0NnY4MG1zZjJ0bzh6bXp5dnBsaiJ9.FGZZfWXBjrZ9WIw8PRo1iA'
+        const mapLayerToken = 'pk.eyJ1IjoibWFyaW52Y2giLCJhIjoiY2tka2E0NnY4MG1zZjJ0bzh6bXp5dnBsaiJ9.FGZZfWXBjrZ9WIw8PRo1iA';
+        mymap.addLayer(new L.TileLayer(`http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6b1a8f471d1a6dbb35e2eda0fd6cb56f`));
+        mymap.addLayer(new L.TileLayer(`http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6b1a8f471d1a6dbb35e2eda0fd6cb56f`));
 
-        // const popup = L.popup()
-        //     .setLatLng(latlng)
-        //     .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-        //     .openOn(map);
 
-        const app = {
-            key: '6b1a8f471d1a6dbb35e2eda0fd6cb56f',
-            baseUrl: 'api.openweathermap.org/data/2.5',
-        };
 
         //NEW CODE
     }
