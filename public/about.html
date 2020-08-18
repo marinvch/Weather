@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="/style/map.css">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <title>Weather App</title>
+</head>
+
+<body>
+
+
+    <div id="background"></div>
+    <div id="conteiner">
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/index.html">Home</a></li>
+                    <li>
+                        <a href="/about.html">About</a> </li>
+                </ul>
+            </nav>
+
+            <section id="search" style="visibility: hidden;">
+                <div>
+                    <input type="text" placeholder="Search">
+
+                </div>
+
+
+            </section>
+        </header>
+
+        <div id="wrapper">
+
+            <div class="column">
+                <h1>Developer on Vanilla JS</h1>
+
+            </div>
+            <div class="column">
+                <h1> Current City</h1>
+                <p id="currentIcon"></p>
+                <p id="currentCity"></p>
+                <p id="currentTemperature">Температура:</p>
+                <p id="currentWind">Вятър:</p>
+                <p id="currentDescription"></p>
+            </div>
+            <div class="column">
+                <h1>Location</h1>
+
+            </div>
+
+            <div id="mapid"></div>
+        </div>
+
+        <section id="map">
+
+        </section>
+
+
+
+
+        <footer>facebook youtube</footer>
+    </div>
+
+    <script src="/app/map.js"></script>
+    <script src="app/app.js"></script>
+
+
+</body>
+
+</html>
