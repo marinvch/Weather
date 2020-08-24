@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const app = {
-        key: '6b1a8f471d1a6dbb35e2eda0fd6cb56f',
+        key: 'eb64fe4ee08dbe8e8ddd2069e01dd31f',
         baseUrl: 'api.openweathermap.org/data/2.5',
         // reqOptions: {
         //     method: 'GET',
@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch(location)
         .then(res => res.json())
         .then(data => {
-            const [lat, long] = data.loc.split(',')
-            postCord(lat, long)
-
+            postCord(data)
         })
 
 
-    function postCord(lat, long) {
+    function postCord(data) {
+        const [lat, long] = data.loc.split(',');
+
         fetch(`http://${app.baseUrl}/weather?lat=${lat}&lon=${long}&appid=${app.key}&lang=bg&units=metric`)
             .then(response => response.json())
             .then(result => currentWeather(result))
