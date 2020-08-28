@@ -14,9 +14,12 @@ document.addEventListener("DOMContentLoaded", function() {
     function postCord(lat, long) {
 
         //Making the map
-        const mymap = L.map('mapid').setView([0, 0], 1);
+        const mymap = L.map('mapid', {
+            center: [lat, long],
+            zoom: 10,
+        });
         const attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
-        const tileUrl = `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+        const tileUrl = `http://{s}.sat.owm.io/sql/{z}/{x}/{y}?from=s2&APPID=eb64fe4ee08dbe8e8ddd2069e01dd31f`
         const tiles = L.tileLayer(tileUrl, { attribution })
         tiles.addTo(mymap);
 
@@ -35,14 +38,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Added map Layers
         const mapLayerToken = 'pk.eyJ1IjoibWFyaW52Y2giLCJhIjoiY2tka2E0NnY4MG1zZjJ0bzh6bXp5dnBsaiJ9.FGZZfWXBjrZ9WIw8PRo1iA';
-        const navigate = this.navigator.geolocation.getCurrentPosition(position => {
-            console.log(position)
-        });
 
-
-
-        mymap.addLayer(new L.TileLayer(`http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6b1a8f471d1a6dbb35e2eda0fd6cb56f`));
-        mymap.addLayer(new L.TileLayer(`http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6b1a8f471d1a6dbb35e2eda0fd6cb56f`));
+        // mymap.addLayer(new L.TileLayer(`http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6b1a8f471d1a6dbb35e2eda0fd6cb56f`));
+        // mymap.addLayer(new L.TileLayer(`http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6b1a8f471d1a6dbb35e2eda0fd6cb56f`));
 
     }
 

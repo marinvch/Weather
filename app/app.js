@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function(e) {
+    e.preventDefault()
     const app = {
         key: '6b1a8f471d1a6dbb35e2eda0fd6cb56f',
         baseUrl: 'api.openweathermap.org/data/2.5',
