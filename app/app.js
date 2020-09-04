@@ -39,11 +39,11 @@ function currentPos(data) {
   const icon = data.weather[0].icon;
   const wind = data.wind.speed;
 
-  const domLocation = document.getElementsByClassName("location")[0];
+  const domLocation = document.getElementsByClassName("location")[1];
   domLocation.innerHTML = `<p>Местоположение: ${name}</p>
 <p>Описание: ${description}</p>
 <p>Темпрература: ${temp}&#176</p>
 <p>Усеща се: ${feels}&#176</p>
-<p>${wind}m/s</p>`;
+<p>Скорост на вятъра: ${wind}m/s</p>`;
 
 }
