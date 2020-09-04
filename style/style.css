@@ -26,7 +26,7 @@ html {
 /* Position text in the middle of the page/image */
 
 header {
-  display: inline;
+  display: block;
 }
 
 ul {
@@ -80,4 +80,10 @@ a:hover {
   padding: 20px;
   text-align: center;
   height: 100vh;
+}
+
+footer{
+  width: 100%;
+  display: block;
+  text-align: center;
 }

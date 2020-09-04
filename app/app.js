@@ -1,95 +1,49 @@
-document.addEventListener("DOMContentLoaded", function (e) {
-  e.preventDefault();
+const api = {
+  key: "eb64fe4ee08dbe8e8ddd2069e01dd31f",
+  baseUrl: "api.openweathermap.org/data/2.5/",
+};
 
-  const app = {
-    key: "eb64fe4ee08dbe8e8ddd2069e01dd31f",
-    baseUrl: "api.openweathermap.org/data/2.5",
-    // reqOptions: {
-    //     method: 'GET',
-    //     redirect: 'follow',
-    //     headers: {
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Content-Type": "text/plain"
-    //     },
-    // }
-  };
+navigator.geolocation.getCurrentPosition(success, error, options);
 
-  // const ipKey = '2c2637df1b55c4';
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
-  //app inputs
-  const inputs = {
-    input: document.querySelector("input"),
-    btn: document.querySelector("button"),
-  };
 
-  inputs.input.addEventListener("keyup", getData);
 
-  function getData() {
-    let city = document.querySelector("input").value;
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
 
-    fetch(
-      `http://${app.baseUrl}/weather?q=${city}&appid=${app.key}&lang=bg&units=metric`
-    )
-      .then((response) => response.json())
-      .then((result) => displayData(result))
-      .catch((error) => console.log("404 not Found"));
-  }
+function success(pos){ 
 
-  function displayData(result) {
-    const info = {
-      description: document.getElementById("description"),
-      cityname: document.getElementById("city"),
-      temperature: document.getElementById("temperature"),
-      wind: document.getElementById("wind"),
-    };
+  const latitude = pos.coords.latitude;
+  const longtitude = pos.coords.longitude;
+  console.log(latitude,longtitude)
 
-    let name = result.name;
-    let city = document.querySelector("input").value;
-    if (city !== "") {
-      info.description.innerHTML = `${result.weather[0].description}`;
-      info.cityname.innerHTML = `Град: ${result.name}`;
-      info.temperature.innerHTML = `Температура: ${result.main.temp}`;
-      info.wind.innerHTML = `Вятър: ${result.wind.speed}м/с`;
-    } else {
-      info.description.innerHTML = "";
-      info.cityname.innerHTML = "";
-      info.temperature.innerHTML = "";
-      info.wind.innerHTML = "";
-    }
-  }
-
-  //current location
-
-  const location = "https://ipinfo.io?token=2c2637df1b55c4";
-  fetch(location)
+  fetch(
+    `https://${api.baseUrl}/weather?lat=${latitude}&lon=${longtitude}&appid=${api.key}&units=metric&lang=bg`
+  )
     .then((res) => res.json())
-    .then((data) => {
-      postCord(data);
-    });
+    .then((data) => currentPos(data));}
 
-  function postCord(data) {
-    const [lat, long] = data.loc.split(",");
 
-    fetch(
-      `http://${app.baseUrl}/weather?lat=${lat}&lon=${long}&appid=${app.key}&lang=bg&units=metric`
-    )
-      .then((response) => response.json())
-      .then((result) => currentWeather(result))
-      .catch((error) => console.log("404 not Found"));
-  }
+function currentPos(data) {
+  console.log(data)
+  const name = data.name;
+  const description = data.weather[0].description;
+  const temp = data.main.temp;
+  const feels = data.main.feels_like;
+  const icon = data.weather[0].icon;
+  const wind = data.wind.speed;
 
-  function currentWeather(result) {
-    const fields = {
-      icon: document.getElementById("currentIcon"),
-      description: document.getElementById("currentDescription"),
-      city: document.getElementById("currentCity"),
-      temperature: document.getElementById("currentTemperature"),
-      wind: document.getElementById("currentWind"),
-    };
+  const domLocation = document.getElementsByClassName("location")[0];
+  domLocation.innerHTML = `<p>Местоположение: ${name}</p>
+<p>Описание: ${description}</p>
+<p>Темпрература: ${temp}&#176</p>
+<p>Усеща се: ${feels}&#176</p>
+<p>${wind}m/s</p>`;
 
-    fields.city.textContent = `Град: ${result.name}`;
-    fields.temperature.textContent = `Температура: ${result.main.temp}`;
-    fields.wind.textContent = `Вятър: ${result.wind.speed}м/с`;
-    fields.description.textContent = `${result.weather[0].description}`;
-  }
-});
+}
