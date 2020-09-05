@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //
     marker
-      .bindPopup(`My Current Location: ${crd.latitude} ${crd.longitude}`)
+      .bindPopup(`Вашите Кординати: ${crd.latitude.toFixed(2)} : ${crd.longitude.toFixed(2)}`)
       .openPopup();
   }
 
